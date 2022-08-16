@@ -14,7 +14,7 @@ export default class Chat extends React.Component {
             messages: [],
             uid: 0
         }
-
+        //config keys
         const firebaseConfig = {
             apiKey: "AIzaSyBQF4hVb36u56Q--Usb76HliDu3zD3YIxU",
             authDomain: "chatapp-b91f5.firebaseapp.com",
@@ -28,7 +28,7 @@ export default class Chat extends React.Component {
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
         }
-        this.referenceShoppingLists = firebase.firestore().collection('messages');
+        this.referenceChatMessages = firebase.firestore().collection('messages');
     }
 
     onCollectionUpdate = (querySnapshot) => {
@@ -53,8 +53,10 @@ export default class Chat extends React.Component {
         this.props.navigation.setOptions({ title: name });
 
         this.referenceChatMessages = firebase.firestore().collection('messages');
+        this.unsubscribeListUser = this.referenceChatMessages.onSnapshot(this.onCollectionUpdate);
 
-        this.authUnsubscribe = firebase.auth().onAuthStateChanged((user) => {
+
+        this.authUnsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
             if (!user) {
                 firebase.auth().signInAnonymously();
             }
@@ -62,6 +64,7 @@ export default class Chat extends React.Component {
                 uid: user.uid,
                 messages: [],
             });
+            this.referenceChatMessageslistUser = firebase.firestore().collection('messages').where("uid", "==", this.state.uid);
             this.unsubscribe = this.referenceChatMessages
                 .orderBy("createdAt", "desc")
                 .onSnapshot(this.onCollectionUpdate);
@@ -69,7 +72,8 @@ export default class Chat extends React.Component {
     }
 
     componentWillUnmount() {
-        this.unsubscribe();
+        this.authUnsubscribe();
+        this.unsubscribeListUser();
     }
 
 
