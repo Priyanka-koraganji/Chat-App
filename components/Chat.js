@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput, Button, FlatList } from 'react-native';
+import { StyleSheet, View, Text, TextInput,ScrollView, Button, FlatList } from 'react-native';
 import { GiftedChat, Bubble, InputToolbar } from 'react-native-gifted-chat';
 import { Platform, KeyboardAvoidingView } from 'react-native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -218,12 +218,12 @@ export default class Chat extends React.Component {
 
     render() {
         let name = this.props.route.params.name;
-        let color = this.props.route.params.color;
+        const { color } = this.props.route.params;
         if (color === '') {
             color = '#8A95A5';
         }
         return (
-            <View style={[{ backgroundColor: color }, { flex: 1 }]}>
+            <View style={[{flex:1}, { backgroundColor: color }]}>
                 <GiftedChat
                     renderBubble={this.renderBubble.bind(this)}
                     renderInputToolbar={this.renderInputToolbar.bind(this)}

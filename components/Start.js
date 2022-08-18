@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ImageBackground, StyleSheet, View, Text, TextInput, Button, TouchableOpacity } from 'react-native';
-
+import { Platform, KeyboardAvoidingView } from 'react-native';
 
 export default class App extends Component {
     constructor(props) {
@@ -44,6 +44,9 @@ export default class App extends Component {
                     </View>
 
                 </ImageBackground>
+                {
+                    Platform.OS === 'android' ? <KeyboardAvoidingView behavior="height" /> : null
+                }
             </View>
         );
     }
@@ -88,7 +91,7 @@ const styles = StyleSheet.create({
     },
     input: {
         width: '88%',
-        padding: '5%',
+        padding: '2%',
         marginBottom: '4%',
         height: 50,
         borderColor: '#757083',
@@ -96,8 +99,8 @@ const styles = StyleSheet.create({
         borderRadius: 2
     },
     button: {
-        height: 50,
-        width: '100%',
+        height: 60,
+        width: '88%',
         padding: '5%',
         backgroundColor: '#757083',
         alignItems: 'center',
@@ -110,6 +113,7 @@ const styles = StyleSheet.create({
     },
     mainColors: {
         flexDirection: 'row',
+        alignItems: 'center',
         marginTop: '3%',
         marginBottom: '3%',
     },
