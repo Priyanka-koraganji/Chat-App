@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 45,
         marginTop: '15%',
-        fontWeight: 'bold',
+        fontWeight: '600',
         color: '#FFFFFF'
     },
     image: {
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
         color: "lightgrey",
         fontSize: 16,
         color: '#757083',
-        fontWeight: 'bold',
+        fontWeight: '600',
         textAlign: "center",
     },
     buttonText: {
