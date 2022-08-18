@@ -19,16 +19,16 @@ export default class App extends Component {
                     <Text style={styles.title}>Chat App</Text>
 
                     <View style={styles.main}>
-                        <TextInput style={[styles.input, styles.smallText]}
+                        <TextInput style={styles.input}
 
                             onChangeText={(name) => this.setState({ name })}
                             value={this.state.name}
                             placeholder='Type here ...'
                         />
 
-                        <View>
+                        <View style={styles.colorWrapper}>
                             <Text style={styles.text}>Choose Background Color</Text>
-                            <View style={styles.mainColors}>
+                            <View style={[styles.mainColors, styles.colorsMargin]}>
                                 <TouchableOpacity style={[styles.colors, styles.color1]} onPress={() => { this.setState({ color: ' #090C08' }) }} />
                                 <TouchableOpacity style={[styles.colors, styles.color2]} onPress={() => { this.setState({ color: ' #474056' }) }} />
                                 <TouchableOpacity style={[styles.colors, styles.color3]} onPress={() => { this.setState({ color: ' #8A95A5' }) }} />
@@ -57,10 +57,11 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     title: {
+        flex: 1,
+        padding: '20%',
         fontSize: 45,
-        marginTop: '15%',
-        fontWeight: '600',
-        color: '#FFFFFF'
+        fontWeight: 'bold',
+        color: '#FFFFFF',
     },
     image: {
         flex: 1,
@@ -69,13 +70,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     main: {
+        flex: 1,
+        width: '88%',
         height: '44%',
-        justifyContent: 'center',
+        backgroundColor: '#FFFFFF',
+        marginBottom: '15%',
+        paddingTop: '6%',
+        paddingBottom: '6%',
         alignItems: 'center',
-        borderWidth: 1,
-        marginTop: '30%',
-        padding: '5%',
-        backgroundColor: '#FFFFFF'
     },
     text: {
         color: "lightgrey",
@@ -83,6 +85,7 @@ const styles = StyleSheet.create({
         color: '#757083',
         fontWeight: '600',
         textAlign: "center",
+        marginBottom: '8%',
     },
     buttonText: {
         color: 'white',
@@ -111,17 +114,29 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: '600'
     },
+    colorWrapper: {
+        width: '88%',
+        // height: '60%',
+        justifyContent: 'center',
+        marginTop: '3%',
+        marginBottom: '3%',
+    },
     mainColors: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop: '3%',
+        // marginTop: '3%',
         marginBottom: '3%',
+    },
+    colorsMargin: {
+        marginLeft: '6%',
+        marginBottom: '5%'
     },
     colors: {
         borderRadius: 20,
         width: 40,
         height: 40,
         marginRight: 30,
+        // marginLeft: '6%',
     },
     color1: {
         backgroundColor: '#090C08'
