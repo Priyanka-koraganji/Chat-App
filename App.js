@@ -8,6 +8,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Start from './components/Start';
 import Chat from './components/Chat';
 
+//import CustomActions from './CustomActions';
+
 // Create the navigator
 const Stack = createStackNavigator();
 

@@ -1,10 +1,11 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput,ScrollView, Button, FlatList } from 'react-native';
+import { StyleSheet, View, Text, TextInput, ScrollView, Button, FlatList } from 'react-native';
 import { GiftedChat, Bubble, InputToolbar } from 'react-native-gifted-chat';
 import { Platform, KeyboardAvoidingView } from 'react-native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import NetInfo from '@react-native-community/netinfo';
-
+import CustomAction from './customActions';
+import MapView from 'react-native-maps';
 
 //import firebase
 const firebase = require('firebase');
@@ -17,9 +18,11 @@ export default class Chat extends React.Component {
             messages: [],
             uid: 0,
             user: {
-                _id: '',
-                name: '',
-                avatar: '',
+                _id: "",
+                name: "",
+                avatar: "",
+                image: null,
+                location: null,
             },
             isConnected: false,
         };
@@ -55,6 +58,8 @@ export default class Chat extends React.Component {
                     name: data.user.name,
                     avatar: data.user.avatar || '',
                 },
+                image: data.image || null,
+                location: data.location || null,
             });
         });
         this.setState({
@@ -143,23 +148,6 @@ export default class Chat extends React.Component {
         }
     }
 
-    // onSend(messages = []) {
-    //     this.setState(
-    //         (previousState) => ({
-    //             messages: GiftedChat.append(previousState.messages, messages),
-    //         }),
-    //         () => {
-    //             // Save messages locally with Async Storage
-    //             this.saveMessages();
-    //             // Call addMessage with last message in message state
-    //             if (this.state.isConnected === true) {
-    //                 this.addMessages(this.state.messages[0]);
-    //             }
-    //         }
-    //     );
-    // }
-
-    //     
     onSend(messages = []) {
         this.setState(
             (previousState) => ({
@@ -181,9 +169,11 @@ export default class Chat extends React.Component {
         this.referenceChatMessages.add({
             uid: this.state.uid,
             _id: message._id,
-            text: message.text || '',
+            text: message.text || "",
             createdAt: message.createdAt,
-            user: message.user
+            user: message.user,
+            image: message.image || null,
+            location: message.location || null,
         });
     };
 
@@ -215,7 +205,34 @@ export default class Chat extends React.Component {
             );
         }
     }
+    renderCustomActions = (props) => {
+        return <CustomAction {...props} />;
+    };
 
+
+    //Render the map location
+    renderCustomView(props) {
+        const { currentMessage } = props;
+        if (currentMessage.location) {
+            return (
+                <MapView
+                    style={{
+                        width: 150,
+                        height: 100,
+                        borderRadius: 13,
+                        margin: 3
+                    }}
+                    region={{
+                        latitude: currentMessage.location.latitude,
+                        longitude: currentMessage.location.longitude,
+                        latitudeDelta: 0.0922,
+                        longitudeDelta: 0.0421,
+                    }}
+                />
+            );
+        }
+        return null;
+    }
     render() {
         let name = this.props.route.params.name;
         const { color } = this.props.route.params;
@@ -223,14 +240,18 @@ export default class Chat extends React.Component {
             color = '#8A95A5';
         }
         return (
-            <View style={[{flex:1}, { backgroundColor: color }]}>
+            <View style={[{ flex: 1 }, { backgroundColor: color }]}>
                 <GiftedChat
                     renderBubble={this.renderBubble.bind(this)}
                     renderInputToolbar={this.renderInputToolbar.bind(this)}
+                    renderActions={this.renderCustomActions}
+                    renderCustomView={this.renderCustomView}
                     messages={this.state.messages}
                     onSend={messages => this.onSend(messages)}
-                    user={{ _id: this.state.user._id, name: this.state.user.name }}
-
+                    user={{
+                        _id: this.state.user._id,
+                        name: name
+                    }}
                 />
 
                 {

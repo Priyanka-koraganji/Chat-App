@@ -24,10 +24,11 @@ export default class App extends Component {
                             onChangeText={(name) => this.setState({ name })}
                             value={this.state.name}
                             placeholder='Type here ...'
+                            placeholderTextColor={"black"}
                         />
 
                         <View style={styles.colorWrapper}>
-                            <Text style={styles.text}>Choose Background Color</Text>
+                            <Text style={styles.text}>Choose Background Color:</Text>
                             <View style={[styles.mainColors, styles.colorsMargin]}>
                                 <TouchableOpacity style={[styles.colors, styles.color1]} onPress={() => { this.setState({ color: ' #090C08' }) }} />
                                 <TouchableOpacity style={[styles.colors, styles.color2]} onPress={() => { this.setState({ color: ' #474056' }) }} />
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
     main: {
         flex: 1,
         width: '88%',
-        height: '44%',
+        height: '49%',
         backgroundColor: '#FFFFFF',
         marginBottom: '15%',
         paddingTop: '6%',
@@ -123,13 +124,11 @@ const styles = StyleSheet.create({
     },
     mainColors: {
         flexDirection: 'row',
-        alignItems: 'center',
-        // marginTop: '3%',
-        marginBottom: '3%',
+        alignItems: 'center'
     },
     colorsMargin: {
         marginLeft: '6%',
-        marginBottom: '5%'
+        marginBottom: '3%'
     },
     colors: {
         borderRadius: 20,
