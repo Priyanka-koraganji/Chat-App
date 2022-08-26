@@ -18,12 +18,13 @@ Key Features:
 
 How to run & use this project: Expo
 * Install Expo via terminal and the Expo app on your mobile device: npm install expo-cli -g
+* Node 16.0.0 version worked for me to run expo-cli
 * Install all dependencies (see package.json) and start the app: expo start
 * Launch Expo app on smartphone and scan the QR code in terminal or Expo window pop-up to open project app
 Also: can launch app to test with Android emulator or web browser within Metro Bundler Firebase. This app uses Google Firebase (version 7) for data storage to store messages and images.
 * Sign in to firebase.google.com to start & "create a project" - start in 'test mode'
 * Create a collection, named "messages", and generate random Document IDs
-* Install Firestore via Firebase in project: npm install firebase 7.9.0 (contingent on node version 14 or less)
+* Install Firestore via Firebase in project: npm install firebase 7.24.0 
 * Link Firebase storage to your project app via GitHub in Project Settings
 * Import Firebase into Chat.js file and initialize app with config and Reference your 'messages' collection in Chat.js
 ￼
