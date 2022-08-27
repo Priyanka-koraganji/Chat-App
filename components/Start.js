@@ -30,10 +30,10 @@ export default class App extends Component {
                         <View style={styles.colorWrapper}>
                             <Text style={styles.text}>Choose Background Color:</Text>
                             <View style={[styles.mainColors, styles.colorsMargin]}>
-                                <TouchableOpacity style={[styles.colors, styles.color1]} onPress={() => { this.setState({ color: ' #090C08' }) }} />
-                                <TouchableOpacity style={[styles.colors, styles.color2]} onPress={() => { this.setState({ color: ' #474056' }) }} />
-                                <TouchableOpacity style={[styles.colors, styles.color3]} onPress={() => { this.setState({ color: ' #8A95A5' }) }} />
-                                <TouchableOpacity style={[styles.colors, styles.color4]} onPress={() => { this.setState({ color: ' #B9C6AE' }) }} />
+                                <TouchableOpacity style={[styles.colors, styles.color1]} onPress={() => { this.setState({ color: '#090C08' }) }} />
+                                <TouchableOpacity style={[styles.colors, styles.color2]} onPress={() => { this.setState({ color: '#474056' }) }} />
+                                <TouchableOpacity style={[styles.colors, styles.color3]} onPress={() => { this.setState({ color: '#8A95A5' }) }} />
+                                <TouchableOpacity style={[styles.colors, styles.color4]} onPress={() => { this.setState({ color: '#B9C6AE' }) }} />
                             </View>
                         </View>
 
